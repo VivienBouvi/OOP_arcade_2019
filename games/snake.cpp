@@ -97,18 +97,18 @@ void Snake::Collisions()
     if (snake_tab[0].getPosition().x < 0 || snake_tab[0].getPosition().y < 0 ||
         snake_tab[0].getPosition().x + snake_tab[0].getSize().x > Window.getSize().x ||
         snake_tab[0].getPosition().y + snake_tab[0].getSize().y > Window.getSize().y) {
-        //Game_lost(Window, score);
         Window.close();
         cout << "You reached a score of " << score << endl;
+        //Game_lost(Window, score);
     } if (snake_tab[0].getPosition().x == food.getPosition().x && snake_tab[0].getPosition().y == food.getPosition().y) {
         FoodGen();
         SnakeGrows();
         score = score + 1;
     } while (i < snake_tab.size()) {
         if(snake_tab[0].getPosition().x == snake_tab[i].getPosition().x && snake_tab[0].getPosition().y == snake_tab[i].getPosition().y) {
-            //Game_lost(Window, score);
             Window.close();
             cout << "You reached a score of " << score << endl;
+            //Game_lost(Window, score);
         }
         i++;
     }
@@ -116,7 +116,6 @@ void Snake::Collisions()
 
 void Snake::Update(Event &event)
 {
-    //keyboard handling
     if (event.key.code == Keyboard::Left) {
             if (!Left && !Right) {
                 Left = 1;
@@ -146,6 +145,7 @@ void Snake::Update(Event &event)
                 Down = 1;
             }
     }
+    //keyboard handling
 }
 
 void Snake::Display()
@@ -166,8 +166,8 @@ int main(int ac, char **av)
 
     window.setFramerateLimit(60);
     window.setKeyRepeatEnabled(false);
-    //Set_Window(window);
-    while (window.isOpen()) {
+    //Window_set(window);
+    while (window.isOpen()) {//Ici, mettre l'appel de la boucle
         snake.Move();
         Event event;
         while (window.pollEvent(event)) {
@@ -176,6 +176,7 @@ int main(int ac, char **av)
             if (event.type == Event::KeyPressed)
 		snake.Update(event);
         }
+        //Event_handling(event);
         window.clear(Color(0,255,0));
         //Window_clear(0, 255, 0);
         snake.Display();
